@@ -1,0 +1,12 @@
+<h1>Edit User</h1>
+<form action="/users/<%= user.id %>/edit" method="POST">
+    <input type="text" name="username" value="<%= user.username %>" required />
+    <input type="email" name="email" value="<%= user.email %>" required />
+    <input type="password" name="password" placeholder="New Password" />
+    <select name="role">
+        <option value="author" <%= user.role === 'author' ? 'selected' : '' %>>Author</option>
+        <option value="admin" <%= user.role === 'admin' ? 'selected' : '' %>>Admin</option>
+    </select>
+    <button type="submit">Update User</button>
+</form>
+<a href="/users">Back to Users</a>

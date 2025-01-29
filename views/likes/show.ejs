@@ -1,0 +1,19 @@
+<h1>Profile of <%= user.username %></h1>
+<h1>Article Liked</h1>
+
+<ul>
+    <% for (let i=0; i < user.Likes.length; i++) { %>
+        <li>
+            <% let id = user.Likes[i]?.articleId; %></li>
+            <% console.log(id) %></li>
+
+            <% if (user.Articles) { %>
+                <a href="/articles/<%= id %>">View Article: <%= user.Likes[i]?.articleId %></a>
+              <% } else { %>
+                <span>No Article Found!!</span>
+              <% } %>
+            <p></p>
+        </li>
+    <% } %>
+</ul>
+

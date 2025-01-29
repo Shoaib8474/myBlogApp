@@ -1,0 +1,45 @@
+<h1>Article Details</h1>
+<!-- <% if (authorisedFollowedUser) { %> -->
+    <!-- <% if (hasFollow) { %> -->
+        <!-- Unfollow button -->
+        <!-- <form action="/follows/unfollow/<%= article.User.id%>" method="POST" style="display:inline;"> -->
+           <!-- <p>Follow the author: <button type="submit">Unfollow</button> </p>  -->
+        <!-- </form> -->
+    <!-- <% } else { %> -->
+        <!-- Follow button -->
+        <!-- <form action="/follows/<%=  article.User.id %>" method="POST" style="display:inline;"> -->
+            <!-- <p>Unfollow the author: <button type="submit">Follow</button></p> -->
+        <!-- </form> -->
+    <!-- <% } %> -->
+<!-- <% } %> -->
+
+<p><a href="/profiles/<%= article.User.id %>">User Profile</a></p>
+<p><strong>Title:</strong> <%= article.title %></p>
+<p><strong>Content:</strong> <%= article.content %></p>
+<p><strong>Category:</strong> <%= article.category %></p>
+<p><strong>Author:</strong> <%= article.User.username %></p>
+
+
+<!-- <p>Likes: <%= authorisedUser %></p> -->
+<p>Like Count: <%= article.dataValues.likeCount || 0 %></p>
+
+<% if (hasLiked) { %>
+    <form action="/articles/<%= article.id %>/unlike" method="POST">
+        <button type="submit">Unlike</button>
+    </form>
+<% } else { %>
+    <form action="/articles/<%= article.id %>/like" method="POST">
+        <button type="submit">Like</button>
+    </form>
+<% } %>
+
+<% if (authorisedUser) { %>
+    <p><a href="/articles/<%= article.id %>/edit">Edit</a></p>
+    <form action="/articles/<%= article.id %>/delete" method="POST" style="display:inline;">
+        <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+    </form>
+<% } %>
+
+<p><a href="/articles">Back to Articles</a></p>
+<button><a href="/auth/logout">Logout</a></button>
+

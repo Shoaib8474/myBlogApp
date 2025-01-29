@@ -1,0 +1,19 @@
+<ul>
+    <% users.forEach(user => { %>
+        <li>
+            <p><%= user.username %></p>
+
+            <% if (followingIds.includes(user.id)) { %>
+                <!-- Unfollow button -->
+                <form action="/follow/unfollow/<%= user.id %>" method="POST" style="display:inline;">
+                    <button type="submit">Unfollow</button>
+                </form>
+            <% } else { %>
+                <!-- Follow button -->
+                <form action="/follow/<%= user.id %>" method="POST" style="display:inline;">
+                    <button type="submit">Follow</button>
+                </form>
+            <% } %>
+        </li>
+    <% }) %>
+</ul>

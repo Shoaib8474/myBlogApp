@@ -1,0 +1,22 @@
+<h1>Profile of <%= user.username %></h1>
+
+<p><strong>Bio:</strong> <%= user.Profile ? user.Profile.bio : 'Not set yet' %></p>
+<p><strong>Avatar:</strong> 
+    <% if (user.Profile && user.Profile.avatar) { %>
+        <%= user.Profile ? user.Profile.avatar: 'Not set yet' %>
+    <% } else { %>
+        <span>Not set yet</span>
+    <% } %>
+</p>
+<button><a href="/profiles/liked/<%= user.id %>">View articles you Liked</a></button>
+
+<% if (authorisedUser) { %>
+    <p><a href="/profiles/<%= user.id %>/edit">Edit Profile</a></p>
+    <form action="/profiles/<%= user.id %>/delete" method="POST" style="display:inline;">
+        <button type="submit">Delete Profile</button>
+    </form>
+<% } %>
+
+<p> <a href="/articles">Back to articles</a></p>
+<button><a href="/auth/logout">Logout</a></button>
+

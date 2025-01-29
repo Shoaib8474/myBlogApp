@@ -1,0 +1,14 @@
+<h1>User Details</h1>
+<p><strong>Username:</strong> <%= user.username %></p>
+<p><strong>Email:</strong> <%= user.email %></p>
+<p><strong>Role:</strong> <%= user.role %></p>
+<% if (user.Profile) { %>
+    <h2>Profile</h2>
+    <p><strong>Bio:</strong> <%= user.Profile.bio %></p>
+    <p><strong>Avatar:</strong> <img src="<%= user.Profile.avatar %>" alt="Avatar" /></p>
+<% } %>
+<a href="/users/<%= user.id %>/edit">Edit</a>
+<form action="/users/<%= user.id %>/delete" method="POST" style="display:inline;">
+    <button type="submit">Delete</button>
+</form>
+<a href="/users">Back to Users</a>

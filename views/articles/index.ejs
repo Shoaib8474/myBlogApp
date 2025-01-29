@@ -1,0 +1,10 @@
+<h1>All Articles</h1>
+<a href="/articles/create">Create New Article</a>
+<ul>
+    <% articles.forEach(article => { %>
+        <li>
+            <a href="/articles/<%= article.id %>"><%= article.title %></a> [by <%= article.User.username %>]
+        </li>
+    <% }) %>
+</ul>
+<button><a href="/auth/logout">Logout</a></button>

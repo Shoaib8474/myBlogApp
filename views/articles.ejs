@@ -1,0 +1,27 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= article.title %></title>
+</head>
+<body>
+    <h1><%= article.title %></h1>
+    <p><%= article.content %></p>
+    <p>Category: <%= article.category %></p>
+
+    <p>Likes: <%= article.dataValues.likeCount || 0 %></p>
+
+    <% if (hasLiked) { %>
+        <form action="/article/<%= article.id %>/unlike" method="POST">
+            <button type="submit">Unlike</button>
+        </form>
+    <% } else { %>
+        <form action="/article/<%= article.id %>/like" method="POST">
+            <button type="submit">Like</button>
+        </form>
+    <% } %>
+
+    <a href="/articles">Back to Articles</a>
+</body>
+</html> -->

@@ -1,0 +1,19 @@
+<h1>Edit Profile for <%= user.username %></h1>
+
+<form action="/profiles/<%= user.id %>/edit" method="POST">
+    <label for="bio">Bio:</label>
+    <textarea id="bio" name="bio" required><%= user.Profile ? user.Profile.bio : '' %></textarea>
+
+    <label for="avatar">Avatar</label>
+    <input
+        type="text"
+        id="avatar"
+        name="avatar"
+        value="<%= user.Profile ? user.Profile.avatar : '' %>"
+        placeholder="Your nikename..."
+    />
+
+    <button type="submit">Save Changes</button>
+</form>
+
+<a href="/profiles/<%= user.id %>">Cancel</a>
