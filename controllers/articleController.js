@@ -6,8 +6,7 @@ const {
   Article,
   User,
   Like,
-  Profile,
-  Follow,
+  Profile
 } = require("../models");
 const { authenticateToken } = require("../middlewares/authMiddleware");
 
@@ -50,17 +49,12 @@ const articleControllers = {
           
               // Check if the current user has liked this article
               const userId = req.user ? req.user.id : null;
-              const authorisedUser = userId === article.userId ? true : false; 
+              const authorisedUser = userId === article.userId ? true : false;
               console.log("Authenticated UserId: ", authorisedUser);
               const hasLiked =
                 (await Like.findOne({ where: { userId, articleId } })) || false;
-                // console.log(hasLiked)
-                // console.log(article.User.id)
-                const hasFollow =
-                  (await Follow.findOne({ where: { followingId: userId, followerId: article.userId  } })) || false;
-                  const authorisedFollowedUser = userId === article.userId ? true : false;
-             
-              res.render("articles/show", { article, hasLiked, user, authorisedUser, authorisedFollowedUser, hasFollow });
+               
+              res.render("articles/show", { article, hasLiked, user, authorisedUser });
             } catch (error) {
               res.status(404).json({ error: "Cant Find any Info." });
             }
@@ -88,8 +82,14 @@ const articleControllers = {
         createArticle: async (req, res) => {
             try {
                 const { title, content, category } = req.body;
-                await Article.create({ title, content, category, userId: req.user.id }); 
+                console.log("Userid:", req.user.id)
+                await Article.create({ title, content, category, userId: req.user.id });
+                console.log(sequelize.models)
+// Assuming `req.user` contains the logged-in user's info
                 res.redirect('/articles');
+                // const articles = await Article.findAll({ include: User });
+                // console.log(articles.id)
+                // res.render("articles/index", { articles })
             } catch (error) {
                 console.error(error);
                 res.status(500).send('Error creating article');

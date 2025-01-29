@@ -52,9 +52,12 @@ const profileControllers = {
             res.status(500).send('Internal Server Error');
         }
     },
+
     deleteProfile:  async (req, res) => {
-        await User.destroy({ where: { id: req.params.id } });
-        res.redirect('/articles');
+        console.log("userID Article:", req.user.id)
+        await Article.destroy({ where: { userId: req.user.id } });
+        await User.destroy({ where: { id: req.user.id } });
+        res.redirect('/auth/register');
     },
     articleLiked: async (req, res) => {
         try {

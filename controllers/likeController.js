@@ -6,8 +6,7 @@ const {
   Article,
   User,
   Like,
-  Profile,
-  Follow,
+  Profile
 } = require("../models");
 const { authenticateToken } = require("../middlewares/authMiddleware");
 

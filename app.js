@@ -3,7 +3,7 @@ const app = express();
 const profileRoutes = require('./routes/profileRoutes');
 const articleRoutes = require('./routes/articleRoutes');
 const authRoutes = require('./routes/authRoutes');
-const { sequelize, Follow } = require('./models');
+const { sequelize } = require('./models');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
@@ -28,9 +28,17 @@ app.use('/profiles', profileRoutes);
 
 const PORT = process.env.PORT || 3000
 // Sync Database
-sequelize.sync()
+
+// sequelize.drop({force: true}).then(()=> {
+//   console.log("Database deleted sucess")
+// })
+// sequelize.drop().then(()=> {
+//   console.log("Database deleted sucess")
+// })
+
+console.log(sequelize.models)
+sequelize.sync({alter: true})
     .then(() => {
-       
         console.log('Database connected and synced.');
         app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
     })

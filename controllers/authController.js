@@ -1,4 +1,4 @@
-const { sequelize, User, Profile, Article, Like, Follow } = require('../models/index');
+const { sequelize, User, Profile, Article, Like} = require('../models/index');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
