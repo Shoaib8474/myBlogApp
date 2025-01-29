@@ -85,7 +85,6 @@ const articleControllers = {
                 console.log("Userid:", req.user.id)
                 await Article.create({ title, content, category, userId: req.user.id });
                 console.log(sequelize.models)
-// Assuming `req.user` contains the logged-in user's info
                 res.redirect('/articles');
                 // const articles = await Article.findAll({ include: User });
                 // console.log(articles.id)
