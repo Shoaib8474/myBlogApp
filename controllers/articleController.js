@@ -50,7 +50,7 @@ const articleControllers = {
           
               // Check if the current user has liked this article
               const userId = req.user ? req.user.id : null;
-              const authorisedUser = userId === article.userId ? true : false; // Ensure req.user exists for unauthenticated users
+              const authorisedUser = userId === article.userId ? true : false; //for unauthenticated users
               console.log("Authenticated UserId: ", authorisedUser);
               const hasLiked =
                 (await Like.findOne({ where: { userId, articleId } })) || false;
@@ -59,7 +59,7 @@ const articleControllers = {
                 const hasFollow =
                   (await Follow.findOne({ where: { followingId: userId, followerId: article.userId  } })) || false;
                   const authorisedFollowedUser = userId === article.userId ? true : false;
-              // const usersList = await User.findAll({ where: { id: { [Op.ne]: userId } } }); // Exclude current user
+              // const usersList = await User.findAll({ where: { id: { [Op.ne]: userId } } }); 
               // const following = await Follow.findAll({ where: { followerId: userId } });
               // const followingIds = following.map((follow) => follow.followingId);
               res.render("articles/show", { article, hasLiked, user, authorisedUser, authorisedFollowedUser, hasFollow });
@@ -90,8 +90,7 @@ const articleControllers = {
         createArticle: async (req, res) => {
             try {
                 const { title, content, category } = req.body;
-                await Article.create({ title, content, category, userId: req.user.id }); // Assuming `req.user` contains the logged-in user's info
-                res.redirect('/articles');
+                await Article.create({ title, content, category, userId: req.user.id }); 
             } catch (error) {
                 console.error(error);
                 res.status(500).send('Error creating article');

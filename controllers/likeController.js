@@ -15,7 +15,7 @@ const { authenticateToken } = require("../middlewares/authMiddleware");
 const likeControllers = {
     unlikeArticle: async (req, res) => {
         try {
-          const userId = req.user.id; // Assume the user is authenticated
+          const userId = req.user.id; 
           const articleId = req.params.id;
       
           // Check if the article exists
@@ -33,7 +33,7 @@ const likeControllers = {
           // Remove the like
           await like.destroy();
       
-          return res.redirect(`/articles/${articleId}`); // Redirect to the article page
+          return res.redirect(`/articles/${articleId}`); 
         } catch (error) {
           console.error(error);
           res.status(500).send("Server error");
@@ -42,7 +42,7 @@ const likeControllers = {
 
     likeArticle: async (req, res) => {
         try {
-          const userId = req.user.id; // Assume the user is authenticated, and `req.user` has the logged-in user's info
+          const userId = req.user.id; 
           const articleId = req.params.id;
       
           // Check if the article exists
@@ -60,7 +60,7 @@ const likeControllers = {
           // Add a like
           await Like.create({ userId, articleId });
       
-          return res.redirect(`/articles/${articleId}`); // Redirect to the article page
+          return res.redirect(`/articles/${articleId}`); 
         } catch (error) {
           console.error(error);
           res.status(500).send("Server error");

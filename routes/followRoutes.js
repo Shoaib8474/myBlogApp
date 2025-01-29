@@ -6,20 +6,6 @@ const { authenticateToken } = require("../middlewares/authMiddleware");
 
 router.use(authenticateToken);
 
-// router.get('/:userId', async (req, res) => {
-//     try {
-//         const { userId } = req.params;
-//         const users = await User.findAll({ where: { id: { [Op.ne]: userId } } }); // Exclude current user
-//         const following = await Follow.findAll({ where: { followerId: userId } });
-//         const followingIds = following.map(follow => follow.followingId);
-
-//         res.render('follow', { users, followingIds });
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).send('Server Error');
-//     }
-// }
-// );
 
 // Follow a user
 router.post('/:id', async (req, res) => {
@@ -35,7 +21,7 @@ router.post('/:id', async (req, res) => {
             await Follow.create({ followerId, followingId });
         }
 
-        res.redirect('back'); // Redirect to the same page
+        res.redirect('back'); // redirect to the same page
     } catch (error) {
         console.error(error);
         res.status(500).send('Server Error');
@@ -45,12 +31,12 @@ router.post('/:id', async (req, res) => {
 // Unfollow a user
 router.post('/unfollow/:id', async (req, res) => {
     try {
-        const followerId = req.user.id; // Assuming you have `req.user` from middleware
+        const followerId = req.user.id; 
         const followingId = req.params.id;
 
         await Follow.destroy({ where: { followerId, followingId } });
 
-        res.redirect('back'); // Redirect to the same page
+        res.redirect('back'); 
     } catch (error) {
         console.error(error);
         res.status(500).send('Server Error');
