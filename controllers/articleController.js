@@ -50,7 +50,7 @@ const articleControllers = {
           
               // Check if the current user has liked this article
               const userId = req.user ? req.user.id : null;
-              const authorisedUser = userId === article.userId ? true : false; //for unauthenticated users
+              const authorisedUser = userId === article.userId ? true : false; 
               console.log("Authenticated UserId: ", authorisedUser);
               const hasLiked =
                 (await Like.findOne({ where: { userId, articleId } })) || false;
@@ -59,9 +59,7 @@ const articleControllers = {
                 const hasFollow =
                   (await Follow.findOne({ where: { followingId: userId, followerId: article.userId  } })) || false;
                   const authorisedFollowedUser = userId === article.userId ? true : false;
-              // const usersList = await User.findAll({ where: { id: { [Op.ne]: userId } } }); 
-              // const following = await Follow.findAll({ where: { followerId: userId } });
-              // const followingIds = following.map((follow) => follow.followingId);
+             
               res.render("articles/show", { article, hasLiked, user, authorisedUser, authorisedFollowedUser, hasFollow });
             } catch (error) {
               res.status(404).json({ error: "Cant Find any Info." });
@@ -91,6 +89,7 @@ const articleControllers = {
             try {
                 const { title, content, category } = req.body;
                 await Article.create({ title, content, category, userId: req.user.id }); 
+                res.redirect('/articles');
             } catch (error) {
                 console.error(error);
                 res.status(500).send('Error creating article');
