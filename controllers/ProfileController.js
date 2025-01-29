@@ -53,8 +53,8 @@ const profileControllers = {
         }
     },
     deleteProfile:  async (req, res) => {
-        await Profile.destroy({ where: { id: req.params.id } });
-        res.redirect('/articles/index');
+        await User.destroy({ where: { id: req.params.id } });
+        res.redirect('/articles');
     },
     articleLiked: async (req, res) => {
         try {

@@ -9,12 +9,12 @@ router.use(authenticateToken);
 
 // View Profile for a specific user
 router.get('/:userId', profileControllers.getProfile);
+router.post('/:id/delete', profileControllers.deleteProfile);
 // Render Edit Profile form
 router.get('/:userId/edit', profileControllers.getEditProfile );
 // Update Profile
 router.post('/:userId/edit', profileControllers.postEditProfile);
 // Handle Article Deletion
-router.post('/:id/delete', profileControllers.deleteProfile);
 router.get('/liked/:userId', profileControllers.articleLiked)
 
 module.exports = router;
