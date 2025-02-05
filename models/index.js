@@ -3,7 +3,7 @@ const User = require('./User.js');
 const Profile = require('./Profile.js');
 const Article = require('./Article.js');
 const Like = require('./Like.js');
-const File = require('./file.js');
+const File = require('./File.js');
 
 
 User.hasOne(Profile, { foreignKey: 'userId', onDelete: 'CASCADE' });
