@@ -1,5 +1,18 @@
 <h1>Profile of <%= user.username %></h1>
 
+<h3>Your profile pic: </h3>
+<% if (user.Profile?.File && Object.keys(user.Profile?.File).length > 0) { %>
+    <div class="row">
+            <div class="col-md-4 mb-3">
+                <img src="/<%= user.Profile.File.path %>" 
+                     class="img-fluid rounded" 
+                     alt="<%= user.Profile.File.filename %>" width="110">
+            </div>
+    </div>
+    <% } else { %>
+        <p><strong>You have't set your profile pic Yet!</strong></p>
+    <% } %>
+
 <p><strong>Bio:</strong> <%= user.Profile ? user.Profile.bio : 'Not set yet' %></p>
 <p><strong>Avatar:</strong> 
     <% if (user.Profile && user.Profile.avatar) { %>
@@ -13,10 +26,9 @@
 <% if (authorisedUser) { %>
     <p><a href="/profiles/<%= user.id %>/edit">Edit Profile</a></p>
     <form action="/profiles/<%= user.id %>/delete" method="POST" style="display:inline;">
-        <button type="submit" onclick="return confirm('Are you sure?')">Delete Profile</button>
+        <button type="submit" onclick="return confirm('Are you sure? [Your every information will be deleted from the system]')">Delete Profile</button>
     </form>
 <% } %>
 
 <p> <a href="/articles">Back to articles</a></p>
 <button><a href="/auth/logout">Logout</a></button>
-

@@ -1,18 +1,44 @@
 <h1>Edit Article</h1>
-<form action="/articles/<%= article.id %>/edit" method="POST" >
+<br>
+<% if (article.Files && article.Files.length > 0) { %>
+    <div class="row">
+        <% article.Files.forEach(file => { %>
+            <div class="col-md-4 mb-3">
+                <form action="/articles/<%= article.id %>/picEdit"  method="POST"  enctype="multipart/form-data">
+                    <a>
+                        <img src="/<%= file.path %>" 
+                        class="img-fluid rounded" 
+                        alt="<%= file.filename %>" width="150">
+                       </a>
+                       <button type="submit">Delete image</button>
+                    </form>
+                    
+                </div>
+                <% }) %>
+    </div>
+    <% } else { %>
+        <p><strong>No image has set Yet!</strong></p>
+    <% } %>
+    <br>
+<form id="b-form" action="/articles/<%= article.id %>/edit" method="POST"  enctype="multipart/form-data">
     <label for="title">Title:</label>
     <input type="text" name="title" value="<%= article.title %>" required />
     <label for="content">Content:</label>
     <textarea name="content" required><%= article.content %></textarea>
     <label for="category">Category:</label>
     <input type="text" name="category" value="<%= article.category %>" />
-    <!-- <select name="userId">
-        <% users.forEach(user => { %>
-            <option value="<%= user.id %>" <%= article.userId === user.id ? 'selected' : '' %>>
-                <%= user.username %>
-            </option>
-        <% }) %>
-    </select> -->
-    <button type="submit">Update Article</button>
+    <br>
+
+    <% if (article.Files && article.Files.length == 0) { %>
+     <div class="mb-1">
+        <br>
+            <label class="form-label"><strong> Upload New Image (Max 4): </strong></label>
+            <input type="file" name="images" class="form-control" multiple accept="image/*">
+            <br>
+        </div>
+    <% } %>
+        <br>
+    <button form="b-form" type="submit">Update Article</button>
 </form>
+<br>
 <a href="/articles">Back to Articles</a>

@@ -1,6 +1,6 @@
 <h1>Edit Profile for <%= user.username %></h1>
 
-<form action="/profiles/<%= user.id %>/edit" method="POST">
+<form action="/profiles/<%= user.id %>/edit" method="POST"  enctype="multipart/form-data">
     <label for="bio">Bio:</label>
     <textarea id="bio" name="bio" required><%= user.Profile ? user.Profile.bio : '' %></textarea>
 
@@ -12,8 +12,22 @@
         value="<%= user.Profile ? user.Profile.avatar : '' %>"
         placeholder="Your nikename..."
     />
-
+    <br>
+    <div class="mb-1">
+        <br>
+        <label class="form-label">Upload your profile pic: </label>
+        <input type="file" name="images" class="form-control" accept="image/*">
+    </div>
+    <br>
     <button type="submit">Save Changes</button>
 </form>
 
-<a href="/profiles/<%= user.id %>">Cancel</a>
+<!-- <a href="/profiles/<%= user.id %>">Cancel</a>
+<label for="file">Avatar</label>
+<input
+    type="file"
+    id="avatar"
+    name="file"
+    value="<%= user.Profile ? user.Profile.avatar : '' %>"
+    required
+/> -->

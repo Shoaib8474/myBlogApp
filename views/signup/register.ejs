@@ -10,19 +10,24 @@
   <% } %>
   <form action="/auth/register" method="POST">
     <div>
+      <br>
       <label>Username:</label>
       <input type="text" name="username" required>
     </div>
     <div>
+      <br>
       <label>Email:</label>
       <input type="email" name="email" required>
     </div>
     <div>
+      <br>
       <label>Password:</label>
       <input type="password" name="password" required>
     </div>
+    <br>
     <button type="submit">Register</button>
   </form>
+  <br>
   <p>Already have an account? <a href="/auth/login">Login</a></p>
 </body>
 </html>

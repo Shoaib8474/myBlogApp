@@ -3,13 +3,20 @@ const User = require('./User.js');
 const Profile = require('./Profile.js');
 const Article = require('./Article.js');
 const Like = require('./Like.js');
+const File = require('./file.js');
 
 
 User.hasOne(Profile, { foreignKey: 'userId', onDelete: 'CASCADE' });
 Profile.belongsTo(User, { foreignKey: 'userId' });
 
+Profile.hasOne(File, { foreignKey: 'profileId', onDelete: 'CASCADE' });
+File.belongsTo(Profile, { foreignKey: 'profileId' });
+
 User.hasMany(Article, { foreignKey: 'userId' });
 Article.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
+
+Article.hasMany(File, { foreignKey: 'articleId', onDelete: 'CASCADE' });
+File.belongsTo(Article, { foreignKey: 'articleId' });
 
 User.hasMany(Like, { foreignKey: 'userId', onDelete: 'CASCADE' });
 Like.belongsTo(User, { foreignKey: 'userId' });
@@ -27,4 +34,4 @@ Like.belongsTo(Article, { foreignKey: 'articleId' });
 //   })()
 
 
-module.exports = { sequelize, User, Profile, Article, Like};
+module.exports = { sequelize, User, Profile, Article, Like, File};

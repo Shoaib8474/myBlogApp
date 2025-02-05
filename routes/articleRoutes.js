@@ -13,11 +13,12 @@ const {
 const { authenticateToken } = require("../middlewares/authMiddleware");
 const articleController = require('../controllers/articleController')
 const likeControllers = require('../controllers/likeController')
+const multer = require('../middlewares/multerMiddleware')
 
 router.use(authenticateToken); //auth
 
 router.get("/create", articleController.renderCreateArticle)
-router.post("/create", articleController.createArticle)
+router.post("/create",  multer.array('images', 4), articleController.createArticle)
 // Display All Articles
 router.get("/", articleController.getArticles);
 // Display Single Article
@@ -25,7 +26,8 @@ router.get("/:id", articleController.getSingleArticle);
 // Show Edit article
 router.get("/:id/edit", articleController.getEditArticle);
 // Handle Article Update
-router.post("/:id/edit", articleController.postEditArticle);
+router.post("/:id/picEdit", multer.array('images', 4), articleController.picEditArticle);
+router.post("/:id/edit", multer.array('images', 4), articleController.postEditArticle);
 
 // Handle Article Deletion
 router.post('/:id/delete', async (req, res) => {

@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 const profileRoutes = require('./routes/profileRoutes');
 const articleRoutes = require('./routes/articleRoutes');
 const authRoutes = require('./routes/authRoutes');
@@ -13,7 +14,8 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
-// app.use(express.static('public'));
+app.use(express.static('public'));
+app.use('/uploads', express.static('uploads'));
 
 
 app.use('/auth', authRoutes);
@@ -28,7 +30,7 @@ app.use('/profiles', profileRoutes);
 
 const PORT = process.env.PORT || 3000
 // Sync Database
-
+// 
 // sequelize.drop({force: true}).then(()=> {
 //   console.log("Database deleted sucess")
 // })
@@ -37,7 +39,7 @@ const PORT = process.env.PORT || 3000
 // })
 
 console.log(sequelize.models)
-sequelize.sync({alter: true})
+sequelize.sync()
     .then(() => {
         console.log('Database connected and synced.');
         app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

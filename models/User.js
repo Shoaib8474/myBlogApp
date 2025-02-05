@@ -10,7 +10,7 @@ const User = sequelize.define('User', {
         autoIncrement: true,
     },
     username: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         allowNull: false,
         unique: true,
     },
@@ -30,9 +30,9 @@ const User = sequelize.define('User', {
 }, { timestamps: true });
 
 
-// User.beforeCreate(async (user) => {
-//     const salt = await bcrypt.genSalt(10);
-//     user.password = await bcrypt.hash(user.password, salt);
-//   });
+User.beforeCreate(async (user) => {
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(user.password, salt);
+  });
 
 module.exports = User;

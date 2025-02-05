@@ -1,11 +1,24 @@
 <h1>Article Details</h1>
 
-<p><a href="/profiles/<%= article.User.id %>">User Profile</a></p>
+<p><a href="/profiles/<%= article.User.id %>"><strong> |> Check Author Profile 👨‍💼|👩‍💼</strong></a></p>
 <p><strong>Title:</strong> <%= article.title %></p>
 <p><strong>Content:</strong> <%= article.content %></p>
 <p><strong>Category:</strong> <%= article.category %></p>
 <p><strong>Author:</strong> <%= article.User.username %></p>
 
+<% if (article.Files && article.Files.length > 0) { %>
+    <div class="row">
+        <% article.Files.forEach(file => { %>
+            <div class="col-md-4 mb-3">
+                <img src="/<%= file.path %>" 
+                     class="img-fluid rounded" 
+                     alt="<%= file.filename %>" width="110">
+            </div>
+        <% }) %>
+    </div>
+    <% } else { %>
+        <p><strong>No image has set Yet!</strong></p>
+    <% } %>
 
 <!-- <p>Likes: <%= authorisedUser %></p> -->
 <p>Like Count: <%= article.dataValues.likeCount || 0 %></p>

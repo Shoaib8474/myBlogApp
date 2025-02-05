@@ -34,10 +34,10 @@ const authController = {
             return res.render('signup/login', { error: 'Invalid credentials' });
           }
     
-          // const validPassword = await bcrypt.compare(password, user.password);
-          // if (!validPassword) {
-          //   return res.render('signup/login', { error: 'Invalid credentials' });
-          // }
+          const validPassword = await bcrypt.compare(password, user.password);
+          if (!validPassword) {
+            return res.render('signup/login', { error: 'Invalid credentials' });
+          }
     
           const token = jwt.sign(
             { id: user.id, email: user.email },
